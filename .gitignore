@@ -1,0 +1,38 @@
+# Legacy code
+*.java
+
+# Python artifacts
+__pycache__
+*.py[cod]
+*$py.class
+.ipynb_checkpoints
+
+# Pickle dumps
+*.p
+*.pkl
+*.pickle
+## known typo for backwards compatibility
+*.plk
+
+# IDE / Linter
+.vscode
+.idea
+.pylintrc
+.groovylintrc
+
+# Local / Temporary Data
+*.local*
+*.bak
+.logs
+*.log
+
+# Environment
+.venv
+venv
+__pypackages__
+
+# OS
+.DS_Store
+.directory
+[tT]humbs.db
+[dD]esktop.ini
