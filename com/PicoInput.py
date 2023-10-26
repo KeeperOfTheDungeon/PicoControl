@@ -1,8 +1,8 @@
 from machine import Pin
 import rp2
 
-from RoboControl.Com.RemoteDataInput import RemoteDataInput
-from RoboControl.Com.Pico.DataPacketPico import DataPacketPico
+from RoboControl.Com.Connection import RemoteDataInput
+from PicoControl.Com.DataPacketPico import DataPacketPico
 
 class PicoInput(RemoteDataInput):
     def __init__(self, connection_counter, rxpin, clock_pin):

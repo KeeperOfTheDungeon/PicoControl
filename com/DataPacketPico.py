@@ -1,8 +1,6 @@
-from RoboControl.Com.Remote.RemoteData import RemoteData
-from RoboControl.Com.Remote.RemoteDataPacket import RemoteDataPacket
-from RoboControl.Com.Remote.RemoteCommand import RemoteCommand
-from RoboControl.Com.Remote.RemoteMessage import RemoteMessage
-from RoboControl.Com.Remote.RemoteStream import RemoteStream
+from RoboControl.Com.RemoteData import RemoteData, RemoteCommand, RemoteMessage, RemoteStream
+from RoboControl.Com.RemoteDataPacket import RemoteDataPacket
+
 from time import sleep
 from machine import Pin
 

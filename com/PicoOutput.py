@@ -6,14 +6,13 @@ from machine import Pin
 #from time import sleep
 import rp2
 
-from RoboControl.Com.Remote.RemoteDataPacket import RemoteDataPacket
-from RoboControl.Com.Remote.RemoteData import RemoteData
-from RoboControl.Com.RemoteDataOutput import RemoteDataOutput
-from RoboControl.Com.Pico.DataPacketPico import DataPacketPico
-from RoboControl.Com.Pico.DataPacketPico import END_TOKEN
-from RoboControl.Com.Remote.RemoteCommandDataPacket import RemoteCommandDataPacket
-from RoboControl.Com.Remote.RemoteMessageDataPacket import RemoteMessageDataPacket
-from RoboControl.Com.Remote.RemoteStreamDataPacket import RemoteStreamDataPacket
+from RoboControl.Com.RemoteDataPacket import RemoteDataPacket
+from RoboControl.Com.RemoteData import RemoteData
+from RoboControl.Com.Connection import RemoteDataOutput
+from PicoControl.Com.DataPacketPico import DataPacketPico
+from PicoControl.Com.DataPacketPico import END_TOKEN
+from RoboControl.Com.RemoteData import RemoteCommandDataPacket, RemoteMessageDataPacket, RemoteStreamDataPacket
+
 
 class PicoOutput(RemoteDataOutput):
 
