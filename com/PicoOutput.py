@@ -24,7 +24,6 @@ class PicoOutput(RemoteDataOutput):
     def transmitt(self, data_packet: RemoteDataPacket) -> None:
         print("PO : transmit ")
         print(str(RemoteDataPacket))
-        data_packet.set_source_address(11)
         pico_data = DataPacketPico()
         pico_data.code(data_packet)
         token_buffer = pico_data.get_buffer()
@@ -36,7 +35,7 @@ class PicoOutput(RemoteDataOutput):
        
         self._state_machine_tx.put(pico_data.get_end_token())		# write end
 
-        print("PO : transmit done")
+        print("PO : transmit done",data_packet)
 
     def stop(self):
         self._state_machine_tx.active(0)

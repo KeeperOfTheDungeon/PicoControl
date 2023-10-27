@@ -27,8 +27,10 @@ class PicoInput(RemoteDataInput):
                   
             if self._data_packet.putToken(token) == DataPacketPico.PACKET_READY:  # put token  into datapacket - if endsync detected function will return True
                 remote_data = self._data_packet.decode()
-                print("pi : deliver")
-                self.deliver_packet(remote_data)
+                print("pi : deliver",remote_data)
+                data_packet = remote_data.get_data_packet()
+                self.deliver_packet(data_packet)
+                #self.deliver_packet(self._data_packet)
 
     def stop(self):
         self.running = False

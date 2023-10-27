@@ -33,7 +33,6 @@ BUFFER_OFFSET_PAYLOAD = 3
 #DATA_PACKET_OFFSET_ID = 3
 #DATA_PACKET_OFFSET_PAYLOAD = 4
 
-Byte: TypeAlias = int
 
 
 class DataPacketPico(RemoteDataPacket):
