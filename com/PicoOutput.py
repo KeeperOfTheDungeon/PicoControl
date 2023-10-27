@@ -23,6 +23,7 @@ class PicoOutput(RemoteDataOutput):
 
     def transmitt(self, data_packet: RemoteDataPacket) -> None:
         print("PO : transmit ")
+        print(str(RemoteDataPacket))
         data_packet.set_source_address(11)
         pico_data = DataPacketPico()
         pico_data.code(data_packet)
