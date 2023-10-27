@@ -70,19 +70,19 @@ class DataPacketPico(RemoteDataPacket):
 
         if message_type == COMMAND_START_TOKEN:
             print("Comand sync")
-            remote_data = RemoteCommand(0, 0, 0)
+            remote_data = RemoteCommand(0, 0)
             self.do_decode(remote_data)
         elif message_type == MESSAGE_START_TOKEN:
             print("Message sync")
-            remote_data = RemoteMessage(0, 0, 0)
+            remote_data = RemoteMessage(0, 0)
             self.do_decode(remote_data)
         elif message_type == STREAM_START_TOKEN:
             print("Stream sync")
-            remote_data = RemoteStream(0, 0, 0)
+            remote_data = RemoteStream(0, 0)
             self.do_decode(remote_data)
         else:
             print("unsync")
-            remote_data = RemoteData(0, 0, 0)
+            remote_data = RemoteData(0, 0)
 
         return remote_data
 
