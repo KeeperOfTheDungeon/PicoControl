@@ -18,22 +18,10 @@ OK_START_TOKEN = 0x1FD
 FAIL_START_TOKEN = 0x1FE
 END_TOKEN = 0x1FF
 
-
-
-#BUFFER_OFFSET_MESSAGE_TYPE = 0
 BUFFER_OFFSET_DEST_ADDRESS = 0
 BUFFER_OFFSET_SRC_ADDRESS = 1
 BUFFER_OFFSET_ID = 2
 BUFFER_OFFSET_PAYLOAD = 3
-
-
-#DATA_PACKET_OFFSET_MESSAGE_TYPE = 0
-#DATA_PACKET_OFFSET_DEST_ADDRESS = 1
-#DATA_PACKET_OFFSET_SRC_ADDRESS = 2
-#DATA_PACKET_OFFSET_ID = 3
-#DATA_PACKET_OFFSET_PAYLOAD = 4
-
-
 
 class DataPacketPico(RemoteDataPacket):
     
@@ -80,7 +68,7 @@ class DataPacketPico(RemoteDataPacket):
             remote_data = RemoteStream(0, 0)
             self.do_decode(remote_data)
         else:
-            print("unsync")
+            print("desync")
             remote_data = RemoteData(0, 0)
 
         return remote_data
