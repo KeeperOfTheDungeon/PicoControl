@@ -25,10 +25,6 @@ class LedSetPico(LedSet):
         for component, pin in zip(self,pin_list): 
             self._ledList.append(LedPico(component, pin))
             
-        print(len(self._ledList))
-        
-        for component in self._ledList:
-            print(component)
-            
+          
     def set_brightness(self, index, brightness):
         self._ledList[index].set_brightness(brightness)
