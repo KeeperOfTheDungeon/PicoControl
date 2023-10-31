@@ -3,8 +3,8 @@ from RoboControl.Robot.AbstractRobot.AbstractRobotDevice import AbstractRobotDev
 from RoboControl.Robot.Device.RobotDevice import RobotDevice
 class PicoDevice(RobotDevice):
 
-    def __init__(self, component_config):
-        super().__init__(component_config)
+    def __init__(self, device_meta_data):
+        super().__init__(device_meta_data)
         self._connected_to_maiun_hub = False
        # self.build()
 
