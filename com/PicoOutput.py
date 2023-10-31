@@ -10,7 +10,6 @@ from RoboControl.Com.RemoteDataPacket import RemoteDataPacket
 from RoboControl.Com.RemoteData import RemoteData
 from RoboControl.Com.Connection import RemoteDataOutput
 from PicoControl.Com.DataPacketPico import DataPacketPico
-from PicoControl.Com.DataPacketPico import END_TOKEN
 from RoboControl.Com.RemoteData import RemoteCommandDataPacket, RemoteMessageDataPacket, RemoteStreamDataPacket
 
 

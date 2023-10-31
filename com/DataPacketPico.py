@@ -1,22 +1,6 @@
 from RoboControl.Com.RemoteData import RemoteData, RemoteCommand, RemoteMessage, RemoteStream
 from RoboControl.Com.RemoteDataPacket import RemoteDataPacket
 
-from time import sleep
-from machine import Pin
-
-# TODO "make enum"
-COMMAND_START_TOKEN = 0x1FA
-
-MESSAGE_START_TOKEN = 0x1FB
-
-STREAM_START_TOKEN = 0x1FC
-
-EXCEPTION_START_TOKEN = 0x1F3
-ALLERT_START_TOKEN = 0x1F4
-
-OK_START_TOKEN = 0x1FD
-FAIL_START_TOKEN = 0x1FE
-END_TOKEN = 0x1FF
 
 BUFFER_OFFSET_DEST_ADDRESS = 0
 BUFFER_OFFSET_SRC_ADDRESS = 1
@@ -28,6 +12,16 @@ class DataPacketPico(RemoteDataPacket):
     PACKET_RESYNC = 1
     PACKET_READY = 2
     TOKEN_FAILURE = 3
+    
+    COMMAND_START_TOKEN = 0x1FA
+    MESSAGE_START_TOKEN = 0x1FB
+    STREAM_START_TOKEN = 0x1FC
+    EXCEPTION_START_TOKEN = 0x1F3
+    ALLERT_START_TOKEN = 0x1F4
+    OK_START_TOKEN = 0x1FD
+    FAIL_START_TOKEN = 0x1FE
+    END_TOKEN = 0x1FF
+    
     
     # TODO why does this inherit from RemoteDataPacket without forwarding init
     def __init__(self):  # noqa
@@ -47,7 +41,7 @@ class DataPacketPico(RemoteDataPacket):
         return self._sync_type
 
     def get_end_token(self):
-        return END_TOKEN
+        return DataPacketPico.END_TOKEN
 
     def decode(self) -> RemoteData:
         
@@ -55,15 +49,15 @@ class DataPacketPico(RemoteDataPacket):
         
         print(message_type)
 
-        if message_type == COMMAND_START_TOKEN:
+        if message_type == DataPacketPico.COMMAND_START_TOKEN:
             print("Comand sync")
             remote_data = RemoteCommand(0, 0)
             self.do_decode(remote_data)
-        elif message_type == MESSAGE_START_TOKEN:
+        elif message_type == DataPacketPico.MESSAGE_START_TOKEN:
             print("Message sync")
             remote_data = RemoteMessage(0, 0)
             self.do_decode(remote_data)
-        elif message_type == STREAM_START_TOKEN:
+        elif message_type == DataPacketPico.STREAM_START_TOKEN:
             print("Stream sync")
             remote_data = RemoteStream(0, 0)
             self.do_decode(remote_data)
@@ -96,7 +90,7 @@ class DataPacketPico(RemoteDataPacket):
     def putToken(self, token):  # noqa
         return_code = 0
   
-        if token == END_TOKEN:
+        if token == DataPacketPico.END_TOKEN:
             self._read = True
             return_code = DataPacketPico.PACKET_READY
 
@@ -104,7 +98,7 @@ class DataPacketPico(RemoteDataPacket):
             self._data_pointer = 0
             return_code = DataPacketPico.TOKEN_FAILURE
       
-        elif (token > 0xff ) and (token != END_TOKEN):
+        elif (token > 0xff ) and (token != DataPacketPico.END_TOKEN):
             self._data_pointer = 0
             self._sync_type = token & 0xff
             return_code = DataPacketPico.PACKET_RESYNC
@@ -132,16 +126,16 @@ class DataPacketPico(RemoteDataPacket):
 
         # command mark
         if isinstance(remote_data, RemoteCommand):
-            self._sync_type = COMMAND_START_TOKEN
+            self._sync_type = DataPacketPico.COMMAND_START_TOKEN
         elif isinstance(remote_data, RemoteMessage):
-            self._sync_type = MESSAGE_START_TOKEN
+            self._sync_type = DataPacketPico.MESSAGE_START_TOKEN
 
         self._data_buffer[BUFFER_OFFSET_DEST_ADDRESS] = remote_data.get_destination_address()
         self._data_buffer[BUFFER_OFFSET_SRC_ADDRESS] = remote_data.get_source_address()
         self._data_buffer[BUFFER_OFFSET_ID] = remote_data.get_id()
         # send Data payload
 
-        self._data_buffer[len(self._data_buffer) - 1] = END_TOKEN
+        self._data_buffer[len(self._data_buffer) - 1] = DataPacketPico.END_TOKEN
         index = BUFFER_OFFSET_PAYLOAD
         for parameter in remote_data.get_parameter_list():
             buffer = parameter.get_as_buffer()
