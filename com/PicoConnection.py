@@ -1,5 +1,5 @@
-from PicoControl.Com.PicoInput import PicoInput
-from PicoControl.Com.PicoOutput import PicoOutput
+from PicoControl.com.PicoInput import PicoInput
+from PicoControl.com.PicoOutput import PicoOutput
 from RoboControl.Com.Connection import Connection
 from RoboControl.Com.RemoteDataPacket import RemoteDataPacket
 import rp2
