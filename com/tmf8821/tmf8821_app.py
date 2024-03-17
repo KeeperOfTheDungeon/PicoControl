@@ -134,7 +134,7 @@ class TMF8821ResultFrame(LittleEndianStructure):
 
     header = TMF8821ResultHeader()
     payload = TMF8821ResultPayload()
-    results = []
+    results: list[TMF8821MeasureResults] = []
 
     def __init__(self):
         super().__init__()

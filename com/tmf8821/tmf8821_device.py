@@ -103,17 +103,19 @@ class Tmf8821Device:
         self.com.i2cTx(self.I2C_SLAVE_ADDR, [self.TMF882X_ENABLE, enable[0] | self.TMF882X_ENABLE__wakeup__MASK])
         return self.Status.OK
 
-    def _setError(self, message):
-        """An error occurred - add it to the error list, which the host can later read out.
+    @staticmethod
+    def _setError(message):
+        """An error occurred - print this shit.
 
         Args:
-            message (str): The errorr message
+            message (str): The error message
         """
-        print(message)
+        print(" - TMF882x - ", " - ERROR - ", message)
 
-    def _log(self, message):
+    @staticmethod
+    def _log(message):
         """Log information"""
-        print(message)
+        print(" - TMF882x - ", " - LOG - ", message)
 
     def _getSlaveAddress(self):
 
