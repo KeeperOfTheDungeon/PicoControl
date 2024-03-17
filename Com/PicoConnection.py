@@ -1,9 +1,7 @@
 from PicoControl.com.PicoInput import PicoInput
 from PicoControl.com.PicoOutput import PicoOutput
 from RoboControl.Com.Connection import Connection
-from RoboControl.Com.RemoteDataPacket import RemoteDataPacket
 import rp2
-import utime
 import _thread
 
 Connection_Counter = 0
@@ -16,7 +14,6 @@ class PicoConnection(Connection):
 
     def __init__(self, meta_data):
         super().__init__()
-        print("PicoConnection - init")
         self._rxpin = meta_data["rx_pin"]  # extract receiver pin from settings
         self._txpin = meta_data["tx_pin"]  # extract transmitter pin from settings
         self._clock_pin = meta_data["clock_pin"]  # extract clock pin from settings
@@ -35,7 +32,6 @@ class PicoConnection(Connection):
             self._data_input = PicoInput(Connection_Counter, self._rxpin, self._clock_pin)  # add data_input
             Subroutine_List.append(self._data_output.process)
             Subroutine_List.append(self._data_input.process)
-            print('Connection counter: ' + str(Connection_Counter))
             Connection_Counter += 2
 
         if not Thread_Active:
