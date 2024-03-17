@@ -7,7 +7,6 @@ from PicoControl.com.DataPacketPico import DataPacketPico
 class PicoInput(RemoteDataInput):
     def __init__(self, connection_counter, rxpin, clock_pin):
         self.led_onboard = Pin(5, Pin.OUT)
-        print("init - PicoInput")
         Pin(rxpin, Pin.IN, Pin.PULL_UP)
         rx = rx_factory(clock_pin)
         self._state_machine_rx = rp2.StateMachine(connection_counter, rx, freq=10000000, in_base=Pin(rxpin), jmp_pin=Pin(rxpin))
@@ -25,8 +24,15 @@ class PicoInput(RemoteDataInput):
                 
             token = self._state_machine_rx.get()
                   
-            if self._data_packet.putToken(token) == DataPacketPico.PACKET_READY:  # put token  into datapacket - if endsync detected function will return True
-                remote_data = self._data_packet.decode()
+            if self._data_packet.putToken(token) == DataPacketPico.PACKET_READY:  # put token into datapacket - if endsync detected function will return True
+                try:
+                    remote_data = self._data_packet.decode()
+                except MemoryError:
+                    # Out of memory, dropping packet
+                    print("Out of memory, dropped an incoming packet")
+                    self._data_packet = DataPacketPico() # clear packet
+                    continue
+                
                 data_packet = remote_data.get_data_packet()
                 self.deliver_packet(data_packet)
 
