@@ -23,11 +23,12 @@ class TMF882xPico:
 
         self.tof.init_bootloader_check()
 
-        soft_timer = Timer(mode=Timer.PERIODIC, period=1000, callback=self.measure)
+        #soft_timer = Timer(mode=Timer.PERIODIC, period=1000, callback=self.measure)
 
     def measure(self, timer):
         frame = self.tof.measure_frame()
         if frame is not None and len(frame) > 0:
+
             frame[0].print()
 
 
