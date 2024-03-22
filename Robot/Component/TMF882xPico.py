@@ -30,10 +30,17 @@ class TMF882xPico:
         if frame is not None and len(frame) > 0:
             counter = 0
             sensors = self._sensor.get_distance_sensors()
+
+            print("number of sensors", len(sensors))
+            print("numer of results", len(frame[0].results))
+            frame[0].print()
             for sensor in sensors:
                 if isinstance(sensor, TMF882xDistanceSensor):
+                    print("---- Distance in Sensor ---- ", frame[0].results[counter])
+
                     sensor.set_distance(
-                        frame[0].results[counter])
+                        frame[0].results[counter]
+                        )
                     counter += 1
                     sensor.remote_msg_distance()
                 else:

@@ -144,12 +144,13 @@ class TMF8821ResultFrame(LittleEndianStructure):
         pdata = pdata[self.header.get_size():]
         self.payload.unpack(pdata[:self.payload.get_size()])
         pdata = pdata[self.payload.get_size():]
-
+        self.results = []
         for i in range(0, self.payload.numberValidResults):
             entry = TMF8821MeasureResults()
             entry.unpack(pdata[:entry.get_size()])
             pdata = pdata[entry.get_size():]
             self.results.append(entry)
+
 
     def print(self):
         self.header.print()
