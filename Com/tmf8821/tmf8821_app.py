@@ -1,8 +1,8 @@
 import time
 import struct
 
-from PicoControl.com.tmf8821.com.i2c_com import I2C_com
-from PicoControl.com.tmf8821.tmf8821_device import Tmf8821Device
+from PicoControl.Com.tmf8821.com.i2c_com import I2C_com
+from PicoControl.Com.tmf8821.tmf8821_device import Tmf8821Device
 
 # constants for all classes
 TMF882X_APP_MAX_ZONES = 18  # time-multiplexe maximum of 18 zones produce a result
@@ -134,7 +134,7 @@ class TMF8821ResultFrame(LittleEndianStructure):
 
     header = TMF8821ResultHeader()
     payload = TMF8821ResultPayload()
-    results: list[TMF8821MeasureResults] = []
+    results = []
 
     def __init__(self):
         super().__init__()

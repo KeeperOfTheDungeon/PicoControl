@@ -2,7 +2,7 @@ from machine import Pin
 import rp2
 
 from RoboControl.Com.Connection import RemoteDataInput
-from PicoControl.com.DataPacketPico import DataPacketPico
+from PicoControl.Com.DataPacketPico import DataPacketPico
 
 class PicoInput(RemoteDataInput):
     def __init__(self, connection_counter, rxpin, clock_pin):

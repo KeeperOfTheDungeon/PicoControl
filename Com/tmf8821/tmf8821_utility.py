@@ -1,7 +1,7 @@
 import time
-from PicoControl.com.tmf8821.com.i2c_com import I2C_com, I2C_Settings
-from PicoControl.com.tmf8821.tmf8821_app import Tmf8821App
-from PicoControl.com.tmf8821.tmf8821_device import Tmf8821Device
+from PicoControl.Com.tmf8821.com.i2c_com import I2C_com, I2C_Settings
+from PicoControl.Com.tmf8821.tmf8821_app import Tmf8821App
+from PicoControl.Com.tmf8821.tmf8821_device import Tmf8821Device
 
 
 class Tmf8821Utility(Tmf8821App):
