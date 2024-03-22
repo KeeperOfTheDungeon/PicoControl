@@ -61,4 +61,4 @@ class TMF882xPicoSet(TMF882xSet):
         if isinstance(remote_command, Cmd_getDistance):
             cmd: Cmd_getDistance = remote_command
             index = cmd.get_parameter_list()[0].get_value()
-            self._tmf882xList[index-1].measure()
+            self._tmf882xList[index - 1].measure()
