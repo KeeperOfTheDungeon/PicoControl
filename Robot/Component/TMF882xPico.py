@@ -1,5 +1,5 @@
 from PicoControl.Com.tmf8821.com.i2c_com import I2C_com
-from PicoControl.Com.tmf8821.tmf8821_app import Tmf8821App, TMF8821ResultFrame
+from PicoControl.Com.tmf8821.tmf8821_app import Tmf8821App, TMF8821ResultFrame, TMF8821MeasureResult
 from PicoControl.Com.tmf8821.tmf8821_utility import Tmf8821Utility
 from RoboControl.Robot.Component.Sensor.DistanceSensorProtocol import Cmd_getDistance
 from RoboControl.Robot.Component.Sensor.TMF882x import TMF882xSet, TMF882x, TMF882xDistanceSensor
@@ -16,35 +16,36 @@ class TMF882xPico:
             ic_com=I2C_com()
         )
 
-        self.tof._log("Try to open connection")
+        self.tof.log("Try to open connection")
         if Tmf8821App.Status.OK != self.tof.open():
-            self.tof._setError("Error open FTDI device")
+            self.tof.error("Error open FTDI device")
             raise RuntimeError("Error open FTDI device")
         else:
-            self.tof._log("Opened connection")
+            self.tof.log("Opened connection")
 
         self.tof.init_bootloader_check()
 
     def measure(self):
         frame = self.tof.measure_frame()
         if frame is not None and len(frame) > 0:
-            counter = 0
+            header = frame[0]
+            results = header.results
             sensors = self._sensor.get_distance_sensors()
+            self.tof.log("Number of Sensors: {}".format(len(sensors)))
+            self.tof.log("Number of Results: {}".format(len(results)))
 
-            print("number of sensors", len(sensors))
-            print("numer of results", len(frame[0].results))
-            frame[0].print()
-            for sensor in sensors:
+            for i in range(0, (len(results) % len(sensors))):
+                sensor = sensors[i]
                 if isinstance(sensor, TMF882xDistanceSensor):
-                    print("---- Distance in Sensor ---- ", frame[0].results[counter])
+                    result = results[i]
 
-                    sensor.set_distance(
-                        frame[0].results[counter]
-                        )
-                    counter += 1
-                    sensor.remote_msg_distance()
+                    if isinstance(result, TMF8821MeasureResult):
+                        print("---- Distance in Sensor ---- ", result.print())
+                        sensor.set_distance(result.distanceInMm)
+                        sensor.set_confidence(result.confidence)
+                        sensor.remote_msg_distance()
                 else:
-                    self.tof._setError("Sensor Type Error")
+                    self.tof.error("Sensor Type Error")
 
 
 class TMF882xPicoSet(TMF882xSet):

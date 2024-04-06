@@ -104,7 +104,7 @@ class Tmf8821Device:
         return self.Status.OK
 
     @staticmethod
-    def _setError(message):
+    def error(message):
         """An error occurred - print this shit.
 
         Args:
@@ -113,7 +113,7 @@ class Tmf8821Device:
         print(" - TMF882x - ", " - ERROR - ", message)
 
     @staticmethod
-    def _log(message):
+    def log(message):
         """Log information"""
         print(" - TMF882x - ", " - LOG - ", message)
 
@@ -135,7 +135,7 @@ class Tmf8821Device:
         intreg = self.com.i2cTxRx(self.I2C_SLAVE_ADDR, [self.TMF882X_INT_STATUS], 1)
         if len(intreg):
             return intreg[0]
-        self._setError("Cannot read the INT_STATUS register")
+        self.error("Cannot read the INT_STATUS register")
         return 0
 
     def clearIntStatus(self, bitMaskToClear):
@@ -150,7 +150,7 @@ class Tmf8821Device:
         enabreg = self.com.i2cTxRx(self.I2C_SLAVE_ADDR, [self.TMF882X_INT_ENAB], 1)
         if len(enabreg):
             return enabreg[0]
-        self._setError("Cannot read the INT_STATUS register")
+        self.error("Cannot read the INT_STATUS register")
         return 0
 
     def enableInt(self, bitMaskToEnable):
