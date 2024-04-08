@@ -34,7 +34,7 @@ class TMF882xPico:
             self.tof.log("Number of Sensors: {}".format(len(sensors)))
             self.tof.log("Number of Results: {}".format(len(results)))
 
-            for i in range(0, (len(results) % len(sensors))):
+            for i in range(0, (len(results) % (len(sensors)+1))):
                 sensor = sensors[i]
                 if isinstance(sensor, TMF882xDistanceSensor):
                     result = results[i]
