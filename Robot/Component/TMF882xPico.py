@@ -1,6 +1,6 @@
-from PicoControl.Com.tmf8821.com.i2c_com import I2C_com
-from PicoControl.Com.tmf8821.tmf8821_app import Tmf8821App, TMF8821ResultFrame, TMF8821MeasureResult
-from PicoControl.Com.tmf8821.tmf8821_utility import Tmf8821Utility
+from PicoControl.Com.tmf882x.com.i2c_com import I2C_com
+from PicoControl.Com.tmf882x.tmf8821_app import Tmf8821App, TMF8821ResultFrame, TMF8821MeasureResult
+from PicoControl.Com.tmf882x.tmf8821_utility import Tmf8821Utility
 from RoboControl.Robot.Component.Sensor.DistanceSensorProtocol import Cmd_getDistance
 from RoboControl.Robot.Component.Sensor.TMF882x import TMF882xSet, TMF882x, TMF882xDistanceSensor
 from machine import Timer
