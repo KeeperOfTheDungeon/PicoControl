@@ -1,0 +1,1 @@
+This library was written by https://github.com/K1ngGrim and is available at https://github.com/K1ngGrim/tmf882X_micropython
